@@ -1,0 +1,464 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for
+% including it in another document. To do this, you have two options:
+%
+% 1) Copy/paste everything between \begin{document} and \end{document}
+% starting at \begin{titlepage} and paste this into another LaTeX file where you
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and
+% move this file to the same directory as the LaTeX file you wish to add it to.
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{Title page with logo}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+%encoding
+%--------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[document]{ragged2e}
+%--------------------------------------
+
+%Portuguese-specific commands
+%--------------------------------------
+\usepackage[portuguese]{babel}
+%--------------------------------------
+
+%Hyphenation rules
+%--------------------------------------
+%\usepackage{hyphenat}
+\hyphenation{mate-mática recu-perar}
+
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+%\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{amssymb}
+\usepackage{float}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\setlength{\parskip}{1em}
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcounter{alphasect}
+\def\alphainsection{0}
+
+\let\oldsection=\section
+\def\section{%
+  \ifnum\alphainsection=1%
+    \addtocounter{alphasect}{1}
+  \fi%
+\oldsection}%
+
+\renewcommand\thesection{%
+  \ifnum\alphainsection=1%
+    (\alph{alphasect})
+  \else%
+    \arabic{section}
+  \fi%
+}%
+
+\newenvironment{alphasection}{%
+  \ifnum\alphainsection=1%
+    \errhelp={Let other blocks end at the beginning of the next block.}
+    \errmessage{Nested Alpha section not allowed}
+  \fi%
+  \setcounter{alphasect}{0}
+  \def\alphainsection{1}
+}{%
+  \setcounter{alphasect}{0}
+  \def\alphainsection{0}
+}%
+
+\begin{document}
+
+\begin{titlepage}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+\HRule \\[0.2cm]
+\textsc{\LARGE Instituto Superior Técnico}\\[4.5cm] % Name of your university/college
+\textsc{\Large Engenharia Eletrotécnica e de Computadores}\\[0.5cm] % Major heading such as course name
+\textsc{\large Eletrotecnia Teórica}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Dimensionamento \vspace{1cm}\\\LARGE Lab IV}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \Large
+\emph{Autores:}\\
+\large
+João \textbf{Gamelas} - 65390\hspace{2.5cm}
+\\Carlos \textbf{Marques} - 81323 \hspace{2.5cm}
+\\Diogo \textbf{Meneses} - 86975 \hspace{2.5cm}
+\\Tiago \textbf{Capítulo} - 90198 \hspace{2.5cm}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.35\textwidth}
+\begin{flushright} \large
+\vspace{1.0cm}
+\emph{dimeneses2015@gmail.com}
+\end{flushright}
+\end{minipage}\\[1.7 cm]
+
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+\vspace{-1cm}
+{\large \ 15 de maio de 2019} % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+\newpage
+
+\section*{3.2 R//L//C}
+
+\subsection*{a)}
+
+Equações do circuito em tempos instantaneos:
+\begin{equation}
+    u_C = u_L = L \frac{d i_L(t)}{dt}
+\end{equation}
+
+\begin{equation}
+    i = i_C + i_L
+\end{equation}
+
+\begin{equation}
+    u_C = -Ri
+\end{equation}
+
+\begin{equation}
+    u_C = \frac{1}{C}  \int i_C(t) dt
+\end{equation}
+
+Com estas equações podemos tirar $u_C$:
+\begin{equation}
+    \begin{aligned}
+        u_C &= -Ri = -R(i_C+i_L) = -R(C\frac{du_C(t)}{dt} + \frac{1}{L} \int u_L(t)dt) \\
+        & = -R(C\frac{du_C(t)}{dt} + \frac{1}{L} \int u_C(t)dt)\\
+        &  = -RC \frac{du_C(t)}{dt} - \frac{R}{L}\int u_C(t)dt \\
+        &  = \frac{du_C(t)}{dt} = -RC \frac{d^2 u_C(t)}{dt^2} - \frac{R}{L} u_C(t)\\
+        &  = RC \frac{d^2 u_C(t)}{dt} + \frac{du_C(t)}{dt} + \frac{R}{R} u_C(t) = 0\\
+        & = \frac{d^2u_C(t)}{dt} + \frac{2}{2RC} \frac{du_C(t)}{dt} + \frac{1}{LC} u_C(t) = 0\\
+        & = \frac{d^2u_C(t)}{dt} + 2 \beta \frac{du_C(t)}{dt} + w_0^2 u_C(t) = 0
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    \beta = \frac{1}{2RC} = 12500 rad/s
+\end{equation}
+
+\begin{equation}
+    w_0^2 = \frac{1}{LC} \Leftrightarrow w_0 = \sqrt{\frac{1}{LC}} = \frac{1}{\sqrt{LC}} = 70710.67812 rad/s
+\end{equation}
+
+\subsection*{b)}
+Para $t\geq0$ o regime que se obtém é um regime forçado estacionário, o que implica que a tensão na bobina é nula e a corrente no condensador é nula.
+\\Devido à continuidade das funções de energia eléctrica e magnéctica, a corrente na bobina e a tensão no condensador não podem sofrer descontinuidades.
+
+\begin{equation}
+    \begin{aligned}
+        &u_C (0^-) = u_C (0^+)\\
+        &u_C (0) = u_L (0) = 0 \Rightarrow u_C(0^+) = 0\\
+        &i_C(0) = 0\\
+        &U_G = Ri \Leftrightarrow i = \frac{U_G}{R} \Leftrightarrow i = \frac{4}{800} = 5 mA
+    \end{aligned}
+\end{equation}
+Para $t\geq0$ como não existem fontes no circuito, então $u_{Cf}(t) = 0$.
+
+\subsection*{c)}
+
+\begin{equation}
+    u_C(t) = u_{Cf}(t) + u_{Cl} (t) = u_{Cl}(t)
+\end{equation}
+
+\begin{equation}
+    u_{Cl}(t) = U_0 e^{st}
+\end{equation}
+Equação característica: 
+
+\begin{equation}
+    s^2+2\beta s + w_o^2 = 0
+\end{equation}
+Para o regime livre podemos obter três soluções distintas, considerando a resistência R variável.
+As soluções para $u_C(t)$ dependem das soluções da equanção característica.
+
+\begin{equation}
+    s = -\beta \pm \sqrt{B^2 - w_0^2}
+\end{equation}
+
+\subsubsection*{1) Regime aperiódico}
+
+Este regime ocorre quando as soluções da equanção característica são reais:
+
+\begin{equation}
+  \begin{aligned}
+    \beta^2 > w_0^2 &\Leftrightarrow (\frac{1}{2RC})^2 > \frac{1}{LC} \\
+    & \Leftrightarrow \frac{1}{4R^2C^2} > \frac{1}{LC} \\
+    & \Leftrightarrow \frac{1}{4C^2} > \frac{R^2}{LC} \\
+    & \Leftrightarrow R^2 < \frac{L}{4C} \\
+    & \Leftrightarrow R < \frac{1}{2} \sqrt{\frac{L}{C}}
+  \end{aligned}
+\end{equation}
+Neste caso as soluções são $s_{1,2} = -\beta \pm \sqrt{B^2 - w_0^2}$ que $s_1 \neq s_2$.
+\\A solução da equanção diferencial é dada por:
+
+\begin{equation}
+  u_C(t) = U_1 e^{s_1t} + U_2 e^{s_2t}
+\end{equation}
+
+\subsubsection*{2) Regime aperiódico limite}
+
+Este regime ocorre quando a equanção característica tem apenas uma raíz de ordem 2.
+
+\begin{equation}
+  \beta^2 = w_0^2 \Leftrightarrow R = \frac{1}{2} \sqrt{\frac{L}{C}}
+\end{equation}
+A solução é portanto $s = -\beta$; $s = s_1 = s_2$
+\\A solução da equanção diferencial é:
+
+\begin{equation}
+  u_C(t) = U_1 e^{-\beta t} + U_2 t e^{-\beta t} = (U_1 + U_2 t ) e^{-\beta t}
+\end{equation}
+
+\subsubsection*{3) Regime oscilatório amortecido}
+
+O regime periódico amortecido ocorre quando as soluções da equanção característica são complexas.
+
+\begin{equation}
+  \beta^2 < w_0^2 \Leftrightarrow R> \frac{1}{2} \sqrt{\frac{L}{C}}
+\end{equation}
+Raízes complexas conjugadas: 
+\begin{equation}
+  \overline{s} = \overline{s_1} = \overline{s_2}^* = -\beta+jw
+\end{equation}
+\begin{equation}
+  w = \sqrt{w_0^2 - \beta^2}
+\end{equation}
+A solução da equanção diferencial é dada por:
+
+\begin{equation}
+  u_C(t) = \overline{U_1} e^{\overline{s}t} + \overline{U_2} e^{\overline{s}^* t}
+\end{equation}
+Como $u_C(t)$ é real então $\overline{U_2} = \overline{U_1}^*$.
+\\Logo:
+
+\begin{equation}
+  u_C(t) = \overline{U_1} e^{\overline{s}t} + \overline{U_1}^* e^{\overline{s}^* t} = 2Re [ \overline{U_1} e^{\overline{s}t}]
+\end{equation}
+
+\begin{equation}
+  \overline{U} = 2\overline{U_1} \Leftarrow u_C(t) = Re [\overline{U_1} e^{\overline{s}t}] = U e^{-\beta t} cos(wt + \alpha)
+\end{equation}
+\clearpage
+
+\subsection*{d)}
+
+$R = 800 \Omega$
+
+\begin{equation}
+  \beta = \frac{1}{2RC} = \frac{1}{2\times800\times50\times10^-9} = 12500 rad/s
+\end{equation}
+
+\begin{equation}
+    w_o^2 = \frac{1}{LC} \Leftrightarrow w_0 = \frac{1}{\sqrt{LC}} = 70710.67812 rad/s
+\end{equation}
+$\beta < w_0$ logo a solução é do tipo oscilatória amortecida.
+
+\begin{equation}
+  w = \sqrt{w_0^2 - \beta^2} = 69597.05454 rad/s
+\end{equation}
+
+\begin{equation}
+  u_C(t) = U_0 e^{-\beta t} cos(wt + \alpha)
+\end{equation}
+Com base nas condições iniciais temos:
+
+\begin{equation}
+  \begin{aligned}
+    &u_C(0) = 0 \\
+    &\Leftrightarrow  0 = U_0 e^{-\beta \times 0} cos(w \times 0 + \alpha) \\
+    &\Leftrightarrow 0 = cos(\alpha) \\
+    &\Leftrightarrow \alpha = \frac{\pi}{2} + k \pi, k \in \mathbb{Z}
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \begin{aligned}
+    &i = 5 mA\\
+    &i = i_c + i_L\\
+    &i_C(0) = 0 \Rightarrow i (0) = i_C(0) + i_L(0) = i_L(0) = 5 \times 10^{-3} A
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \begin{aligned}
+    &i_L(t) = \frac{1}{L} \int u_L dt = \frac{1}{L} \int u_C(t) dt \\
+    & \Leftrightarrow  = \frac{1}{L} \int Re[\overline{U} e^{\overline{s} t}] dt = \frac{1}{L} Re [{\frac{\overline{U} e^{\overline{s}t}}{\overline{s}}}]\\
+    & \Leftrightarrow = \frac{1}{L} Re [\frac{\overline{U} e^{\overline{s}t}}{w_0} e^{-j \delta}] = \frac{U_0}{w_0L} e^{-\beta t} cos(wt + \alpha - \delta)
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  i_L(0) = \frac{U_0}{w_0 L} cos(\alpha - \delta) = 5 mA
+\end{equation}
+Logo $cos(\alpha - \delta) > 0$ então $-\frac{\pi}{2} < \alpha - \delta < \frac{\pi}{2} \Leftrightarrow \frac{\pi}{2} < \frac{\pi}{2} + k\pi - \delta < \frac{\pi}{2}$.
+
+\begin{equation}
+  \begin{aligned}
+    &-\beta + jw = w_0 e^{j \delta}\\
+    &\delta = \pi - arctan(\frac{w}{\beta}) \simeq 1.7485 rad
+  \end{aligned}
+\end{equation}
+Pode então concluir-se que $k = 0$ e $\alpha = \frac{\pi}{2}$.
+\\Temos portanto:
+
+\begin{equation}
+  U_0 = \frac{i_L(0) L w_0}{cos(\alpha - \delta)} \simeq 1.4368 V
+\end{equation}
+
+\begin{equation}
+  u_C(t) = 1.4368 e^{-12500 t} cos (69597.05454 t + \frac{\pi}{2}) [V]
+\end{equation}
+O quociente entre dois extremos consecutivos de $u_C$ é dado por:
+
+\begin{equation}
+  \frac{A_n}{A_{n+1}} = \frac{U_0 e^{- \beta (\frac{n \pi - \alpha}{w})}}{U_0 e^{- \beta (\frac{(n+1) \pi - \alpha}{w})}} = e^{-\beta(\frac{n \pi - (n+1) \pi}{w})} = e^{\beta (\frac{\pi}{w})} = e^{\beta(\frac{T}{2})} \Rightarrow \lambda = \frac{\beta T}{2}
+\end{equation}
+Verifica-se então que:
+
+\begin{equation}
+  \begin{aligned}
+    &(\frac{A_1}{A_{n}})^{\frac{1}{n-1}} = (\frac{U_0 e^{- \beta (\frac{\pi - \alpha}{w})}}{U_0 e^{- \beta (\frac{n \pi - \alpha}{w})}})^{\frac{1}{n-1}} = (e^{-\beta(\frac{- (n+1) \pi}{w})})^{\frac{1}{n-1}}\\ 
+    &\Leftrightarrow e^{\beta (\frac{\pi}{w})} = e^{\beta(\frac{T}{2})} \Rightarrow \lambda = \frac{\beta T}{2}
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \lambda = \frac{\beta \pi}{w} \simeq 0.5642
+\end{equation}
+
+\begin{equation}
+  \begin{aligned}
+    i_L(t) &= \frac{U_0}{w_0 L} e^{-\beta t} cos(wt + \alpha - \delta) \\
+    &= \frac{1.4368}{282.843} e^{-12500 t} cos(69597.05454 t + \frac{\pi}{2} - 1.7485) [A]
+  \end{aligned}
+\end{equation}
+
+\subsection*{e)}
+
+Nas condições do regime livre do tipo periódico limite (equação característica com uma raíz dupla):
+\begin{equation}
+  \beta^2 = w_0^2 \Leftrightarrow R = \frac{1}{2}\sqrt{\frac{L}{C}}
+\end{equation}
+Logo: 
+
+\begin{equation}
+  R_0 = R = \frac{1}{2} \sqrt{\frac{4\times10^{-3}}{50\times10^{-9}}} \simeq 141.421 \Omega
+\end{equation}
+
+\begin{equation}
+  \beta = \frac{1}{2RC} = \frac{1}{2 \times 141.421 \times 50 \times 10^{-9}} = 70710.85624 rad/s
+\end{equation}
+A solução para a tensão no condensador é dada por:
+
+\begin{equation}
+  u_C(t) = (U_1+U_2 t) e^{-\beta t}
+\end{equation}
+Tendo as condições iniciais:
+
+\begin{equation}
+  \begin{aligned}
+    &u_C(0^-) = u_C(0^+)\\
+    &u_L(0^-) = u_L(0^+) = 0\\
+    &i_C(0) = 0
+  \end{aligned}
+\end{equation}
+Calculando agora as constantes $U_1$ e $U_2$:
+
+\begin{equation}
+  u_C(0) = 0 \Leftrightarrow U_1 = 0
+\end{equation}
+
+\begin{equation}
+  i_L = \frac{1}{L} \int u_L dt = \frac{1}{L} \int U_2 t e^{st} dt = \frac{U_2}{L} \frac{e^{st}(st-1)}{s^2}
+\end{equation}
+Tendo em conta $i_L(0) = I_{0L} = \frac{4}{141.421} \simeq 28.28 mA$
+
+\begin{equation}
+  i_L(0) =-\frac{U_2}{Ls^2} = 28.28 mA 
+\end{equation}
+Sendo $s = -\beta$ temos que $U_2 \simeq -565.603 kV$
+\\Assim:
+
+\begin{equation}
+  u_C(t) = U_2 t e^{-\beta t}
+\end{equation}
+A tensão no condensador será mínima quando a derivada for nula:
+\begin{equation}
+  \frac{du_C(t)}{dt} = U_2 e^{st} + U_2 t e^{st} = 0 \Leftrightarrow 1 + st = 0 \Leftrightarrow t = -\frac{1}{s} = \frac{1}{\beta} \simeq 14.14 \mu s
+\end{equation}
+
+\begin{equation}
+  u_C(t_{min}) = u_C(14.14 \mu s) \simeq -2.9426 V
+\end{equation}
+
+\end{document}
